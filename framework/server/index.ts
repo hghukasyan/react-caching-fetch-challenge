@@ -55,7 +55,10 @@ const runServer = async () => {
       .send(buildHtmlDoc(await renderApp(false)));
   });
 
-  fastify.listen({ port: 3000 }, (err, address) => {
+  const port = Number(process.env.PORT) || 3000;
+  const host = process.env.HOST || '127.0.0.1';
+
+  fastify.listen({ port, host }, (err, address) => {
     if (err) {
       fastify.log.error(err);
       process.exit(1);

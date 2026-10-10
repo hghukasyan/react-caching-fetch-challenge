@@ -5,10 +5,13 @@
   "main": "index.js",
   "scripts": {
     "build": "npm run build:server && npm run build:client",
-    "build:server": "rm -rf dist && mkdir dist && cp ./framework/mock-server/mockServiceWorker.js dist/ && esbuild ./framework/server/index.js --bundle --minify --platform=node --outfile=dist/server.js",
-    "build:client": "esbuild ./framework/client/index.js --bundle --minify --platform=browser --outfile=dist/client.js",
-    "start": "npm run build && node dist/server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:server": "rm -rf dist && mkdir dist && cp ./framework/mock-server/mockServiceWorker.js dist/ && esbuild ./framework/server/index.ts --bundle --minify --platform=node --outfile=dist/server.js",
+    "build:client": "esbuild ./framework/client/index.tsx --bundle --minify --platform=browser --outfile=dist/client.js",
+    "start": "npm run build && node --env-file=.env dist/server.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint . --ext .ts,.tsx",
+    "format": "prettier --write .",
+    "test": "tsx --test caching-fetch-library/cachingFetch.test.ts"
   },
   "author": "",
   "license": "ISC",
@@ -16,7 +19,15 @@
     "@types/node": "^20.12.12",
     "@types/react": "^18.3.2",
     "@types/react-dom": "^18.3.0",
-    "esbuild": "^0.21.3"
+    "@typescript-eslint/eslint-plugin": "^7.18.0",
+    "@typescript-eslint/parser": "^7.18.0",
+    "esbuild": "^0.21.3",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
+    "prettier": "^3.3.3",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.4"
   },
   "dependencies": {
     "fastify": "^4.27.0",

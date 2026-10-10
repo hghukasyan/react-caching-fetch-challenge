@@ -11,7 +11,7 @@ const buildHtmlDoc = (
     <title>People Directory</title>
 </head>
     <body>
-        ${initialData ? `<script>window.__INITIAL_DATA__ = '${initialData}'</script>` : ''}
+        ${initialData ? `<script>window.__INITIAL_DATA__ = ${JSON.stringify(initialData)}</script>` : ''}
         <div id="app">${initialHtml}</div>
         ${withScript ? '<script src="/client.js"></script>' : ''}
     </body>
